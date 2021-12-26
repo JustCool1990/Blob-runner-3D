@@ -11,7 +11,7 @@ public class CrossbarTrap : Obstacle
         SetObstacleParametres();
     }
 
-    protected override void SetObstacleParametres(float waitingTime = 0)
+    private void SetObstacleParametres()
     {
         transform.localPosition = new Vector3(transform.localPosition.x, _bulgeDistance, transform.localPosition.z);
     }

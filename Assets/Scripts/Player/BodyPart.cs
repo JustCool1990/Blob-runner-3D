@@ -9,11 +9,17 @@ public class BodyPart : MonoBehaviour
     [SerializeField] private BodyPartName _bodyPartName;
 
     private bool _hasBroken = false;
+    private Transform _parent;
 
     public BodyPartName BodyPartName => _bodyPartName;
     public bool HasBroken => _hasBroken;
-    public event UnityAction<BodyPartName> Broken;
-    public event UnityAction Repaired;
+    public event UnityAction<BodyPartName> Brokened;
+    public event UnityAction<BodyPartName> Repaired;
+
+    private void Awake()
+    {
+        _parent = transform.parent;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,30 +29,53 @@ public class BodyPart : MonoBehaviour
             {
                 foreach (var bodyPart in _relatedBodyParts)
                 {
-                    if (bodyPart.HasBroken == true) 
-                        continue;
-
-                    bodyPart.UpdateBrokenStatus(true);
-                    bodyPart.SeparatePiece();
+                    if (bodyPart.HasBroken == false)
+                    {
+                        DesableBrokenPart(bodyPart, obstacle);
+                    }
                 }
             }
             else
             {
-                UpdateBrokenStatus(true);
-                SeparatePiece();
+                if (_hasBroken == false)
+                {
+                    DesableBrokenPart(this, obstacle);
+                }
             }
         }
     }
 
-    public void UpdateBrokenStatus(bool status = false)
+    private void DesableBrokenPart(BodyPart bodyPart, Obstacle obstacle)
+    {
+        bodyPart.UpdateBrokenStatus(true);
+        bodyPart.SeparatePiece(obstacle);
+    }
+
+    private void UpdateBrokenStatus(bool status = false)
     {
         _hasBroken = status;
     }
 
-    public void SeparatePiece()
+    private void SeparatePiece(Obstacle obstacle)
     {
-        Broken?.Invoke(_bodyPartName);
-        gameObject.SetActive(false);
+        Brokened?.Invoke(_bodyPartName);
+        transform.SetParent(obstacle.transform);
+        transform.localScale = Vector3.one;
+    }
+
+    private void ResetTransform()
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
+    }
+
+    public void RepairePiece()
+    {
+        UpdateBrokenStatus(false);
+        transform.SetParent(_parent);
+        ResetTransform();
+        Repaired?.Invoke(_bodyPartName);
     }
 }
 

@@ -22,6 +22,9 @@ public class PlayerAnimation : MonoBehaviour
         _player.LostLeftLeg += OnLostLeftLeg;
         _player.LostRightLeg += OnLostRightLeg;
         _player.LostLegs += OnLostLegs;
+        _player.RepairedLeftLeg += OnRepairedLeftLeg;
+        _player.RepairedRightLeg += OnRepairedRightLeg;
+        _player.RepairedBody += OnRepairedBody;
     }
 
     private void OnDisable()
@@ -30,6 +33,9 @@ public class PlayerAnimation : MonoBehaviour
         _player.LostLeftLeg -= OnLostLeftLeg;
         _player.LostRightLeg -= OnLostRightLeg;
         _player.LostLegs -= OnLostLegs;
+        _player.RepairedLeftLeg -= OnRepairedLeftLeg;
+        _player.RepairedRightLeg -= OnRepairedRightLeg;
+        _player.RepairedBody -= OnRepairedBody;
     }
 
     private void OnGameStarted()
@@ -56,7 +62,21 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(AnimatorPlayerController.States.Crawl, true);
     }
 
-    private void RepairBody()
+    private void OnRepairedLeftLeg()
+    {
+        DisableAnimations();
+        _animator.SetBool(AnimatorPlayerController.States.JumpLeftLeg, true);
+        _animator.SetTrigger(AnimatorPlayerController.States.StandUP);
+    }
+
+    private void OnRepairedRightLeg()
+    {
+        DisableAnimations();
+        _animator.SetBool(AnimatorPlayerController.States.JumpRightLeg, true);
+        _animator.SetTrigger(AnimatorPlayerController.States.StandUP);
+    }
+
+    private void OnRepairedBody()
     {
         DisableAnimations();
         _animator.SetBool(AnimatorPlayerController.States.Run, true);

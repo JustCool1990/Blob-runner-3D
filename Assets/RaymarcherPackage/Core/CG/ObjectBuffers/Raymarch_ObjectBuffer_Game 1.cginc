@@ -26,13 +26,15 @@ float2 MAS_ShapeGenerator(float3 center)
    float2 obj8 = OP_Fragment(float2 (GEN_BASE(center - _obj8Model.xyz,params8.xyz),_obj8Model.w),params8.w,center);
    float2 obj9 = OP_Fragment(float2 (GEN_BASE(center - _obj9Model.xyz,params9.xyz),_obj9Model.w),params9.w,center);
 //-----Registered Advanced Operators
+//Groups of obj1
+   float2 group0 = OP_SmoothSubtraction(obj0,obj1,_MASrenderSmoothness,_MASrenderColorSmoothness);
+
 //-----Connected Advanced Operators - Straight Unions
 
 //-----Connected Advanced Operators - Smooth Unions
 
 
 //-----Registered Final Groups & Single Objects
-   float2 group0 = OP_SmoothUnion(obj0,obj1,_MASrenderSmoothness);
    float2 group1 = OP_SmoothUnion(group0,obj2,_MASrenderSmoothness);
    float2 group2 = OP_SmoothUnion(group1,obj3,_MASrenderSmoothness);
    float2 group3 = OP_SmoothUnion(group2,obj4,_MASrenderSmoothness);

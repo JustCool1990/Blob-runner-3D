@@ -43,7 +43,7 @@ public abstract class MovableObstacle : Obstacle
         }
     }
 
-    protected override void SetObstacleParametres(float waitingTime = 0)
+    protected void SetObstacleParametres(float waitingTime = 0)
     {
         IdleTime = waitingTime > 0? waitingTime : Random.Range(MinIdleTime, MaxIdleTime);
         TargetPosition = transform.localPosition == StartPosition ? EndPosition : StartPosition;

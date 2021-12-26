@@ -11,7 +11,7 @@ public class VacuumCleaner : Obstacle
         SetObstacleParametres();
     }
 
-    protected override void SetObstacleParametres(float waitingTime = 0)
+    protected private void SetObstacleParametres()
     {
         transform.localPosition = new Vector3(transform.localPosition.x, _verticalDistance, transform.localPosition.z);
     }

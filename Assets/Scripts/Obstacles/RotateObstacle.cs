@@ -19,7 +19,7 @@ public class RotateObstacle : Obstacle
             SetObstacleParametres();
     }
 
-    protected override void SetObstacleParametres(float waitingTime = 0)
+    protected void SetObstacleParametres()
     {
         _rotateY = 0;
     }

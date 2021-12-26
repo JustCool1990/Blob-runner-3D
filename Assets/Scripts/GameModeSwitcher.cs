@@ -10,6 +10,7 @@ public class GameModeSwitcher : MonoBehaviour
     [SerializeField] private Player _player;
 
     public event UnityAction GameStarted;
+    public event UnityAction GameEnded;
 
     private void Awake()
     {
@@ -20,11 +21,13 @@ public class GameModeSwitcher : MonoBehaviour
     private void OnEnable()
     {
         _mainMenuScreen.ScreenTouched += OnScreenTouched;
+        _player.Died += OnDied;
     }
 
     private void OnDisable()
     {
         _mainMenuScreen.ScreenTouched -= OnScreenTouched;
+        _player.Died -= OnDied;
     } 
     
     private void OnScreenTouched()
@@ -33,5 +36,10 @@ public class GameModeSwitcher : MonoBehaviour
         _gameInterface.Open();
 
         GameStarted?.Invoke();
+    }
+
+    private void OnDied()
+    {
+        GameEnded?.Invoke();
     }
 }

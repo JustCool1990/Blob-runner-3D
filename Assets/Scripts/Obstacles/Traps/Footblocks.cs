@@ -18,11 +18,8 @@ public class Footblocks : MonoBehaviour
         {
             for (int j = 0; j < _collums; j++)
             {
-                if(_arrayLayout.rows[i].row[j])
-                {
-                    int index = i + j + delta;
-                    _footblocks[index].gameObject.SetActive(true);
-                }
+                if(_arrayLayout.Rows[i].Row[j] == true)
+                    _footblocks[i + j + delta].gameObject.SetActive(true);
             }
 
             delta += _rows - _collums;

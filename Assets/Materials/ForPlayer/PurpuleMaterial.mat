@@ -7,11 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: a244b65213a0ab5449c55f8538e6dea9, type: 3}
-  m_ShaderKeywords: 
+  m_Name: PurpuleMaterial
+  m_Shader: {fileID: 4800000, guid: 47acca887e8a40f42a5b3c8c8dc9fd57, type: 3}
+  m_ShaderKeywords: CURVEDWORLD_BEND_ID_1 CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -39,16 +39,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MAScolorRamp:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MASrenderMainFilter:
-        m_Texture: {fileID: 2800000, guid: ab943d3d5ac38bb448fabe3cdc9516d1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b47cc52a34222a64d85e7a4758b0c9db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -71,23 +63,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MASfogDensity: 0
-    - _MASrenderColorSmoothness: 0
-    - _MASrenderMaxDistance: 10
-    - _MASrenderOutlineDens: 1
-    - _MASrenderOutlineSoft: 1
-    - _MASrenderQuality: 0.005
-    - _MASrenderQualitySetting: 0
-    - _MASrenderShadowUmbraIntens: 0.1
-    - _MASrenderSmoothness: 0
-    - _MASrenderSpecularIntens: 0.5
-    - _MASrenderSpecularSize: 1
-    - _MASrenderToonDens: 1
-    - _MASrenderToonThresh: 1
     - _Metallic: 0
     - _Mode: 0
-    - _OPloopEnabled: 0
-    - _OPloopTwoDimens: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -97,12 +74,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CurvedWorldBendSettings: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MASfogColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MASrenderLightDir: {r: 0, g: -1, b: 0, a: 0}
-    - _MASrenderMainColor: {r: 1, g: 0, b: 0, a: 1}
-    - _MASrenderSecondColor: {r: 1, g: 0.5019608, b: 0, a: 1}
-    - _OPfragmentDirect: {r: 1, g: 1, b: 1, a: 1}
-    - _OPfragmentSize: {r: 1, g: 1, b: 1, a: 1}
-    - _OPloopTilling: {r: 10, g: 10, b: 10, a: 10}
   m_BuildTextureStacks: []

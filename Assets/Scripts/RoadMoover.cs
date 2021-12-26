@@ -18,11 +18,13 @@ public class RoadMoover : MonoBehaviour
     private void OnEnable()
     {
         _gameModeSwitcher.GameStarted += OnGameStarted;
+        _gameModeSwitcher.GameEnded += OnGameEnded;
     }
 
     private void OnDisable()
     {
         _gameModeSwitcher.GameStarted -= OnGameStarted;
+        _gameModeSwitcher.GameEnded -= OnGameEnded;
     }
 
     private void FixedUpdate()
@@ -34,5 +36,10 @@ public class RoadMoover : MonoBehaviour
     private void OnGameStarted()
     {
         _gameStarted = true;
+    }
+
+    private void OnGameEnded()
+    {
+        _gameStarted = false;
     }
 }

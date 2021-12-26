@@ -7,24 +7,17 @@ using UnityEngine.UI;
 public class Parallax : MonoBehaviour
 {
     [SerializeField] private GameModeSwitcher _gameModeSwitcher;
-    //[SerializeField] private DistanceCounter _distanceCounter;
     [SerializeField] private float _speed;
-    //[SerializeField] private float _standartAccelerationCoefficient = 1;
 
     [SerializeField] private bool _OtherSide = false;
-    [SerializeField] private ScrollDirection _scrollDirection;
     [SerializeField] private bool _horizontalScroll = false;
     [SerializeField] private bool _verticallScroll = false;
 
 
-    //private float _lastAccelerationCoefficient;
     private RawImage _image;
-    private float _standartSpeed;
     private float _imagePositionY = 0;
     private float _imagePositionX = 0;
-    //private bool _scroll = false;
-    /*private float _lowerScrollLimiter = 0.15f;
-    private float _upperScrollLimiter = -0.15f;*/
+
     private bool _resetUVRectY => _imagePositionY <= -1 || _imagePositionY >= 1;
     private bool _resetUVRectX => _imagePositionX <= -1 || _imagePositionX >= 1;
     private bool _scroll => _horizontalScroll == true || _verticallScroll == true;
@@ -32,25 +25,18 @@ public class Parallax : MonoBehaviour
     private void Awake()
     {
         _image = GetComponent<RawImage>();
-        _standartSpeed = _speed;
-        //_lastAccelerationCoefficient = _standartAccelerationCoefficient;
-        //StopSpeed();
     }
 
     private void OnEnable()
     {
         _gameModeSwitcher.GameStarted += OnGameStarted;
-        /*_gameModeSwitcher.GameOver += OnGameOver;
-        _gameModeSwitcher.ReturningStartScreen += OnReturningStartScreen;
-        _distanceCounter.SpeedIncreased += OnSpeedIncreased;*/
+        _gameModeSwitcher.GameEnded += OnGameEnded;
     }
 
     private void OnDisable()
     {
         _gameModeSwitcher.GameStarted -= OnGameStarted;
-        /*_gameModeSwitcher.GameOver -= OnGameOver;
-        _gameModeSwitcher.ReturningStartScreen -= OnReturningStartScreen;
-        _distanceCounter.SpeedIncreased -= OnSpeedIncreased;*/
+        _gameModeSwitcher.GameEnded -= OnGameEnded;
     }
 
     private void FixedUpdate()
@@ -82,38 +68,10 @@ public class Parallax : MonoBehaviour
     {
         _verticallScroll = true;
     }
-    
-    /*private void OnGameOver()
+
+    private void OnGameEnded()
     {
-        StopSpeed();
+        _verticallScroll = false;
+        _horizontalScroll = false;
     }
-    private void OnReturningStartScreen()
-    {
-        OnGameOver();
-    }*/
-
-    /*private void OnSpeedIncreased(float accelerationCoefficient)
-    {
-        _lastAccelerationCoefficient += accelerationCoefficient;
-    }*/
-
-    private void StopSpeed()
-    {
-        _speed = 0;
-    }
-
-    private void ResetSpeed()
-    {
-        _speed = _standartSpeed;
-        //_lastAccelerationCoefficient = _standartAccelerationCoefficient;
-    }
-}
-
-public enum ScrollDirection
-{
-    Stay,
-    Up,
-    Down,
-    Left,
-    Right
 }
