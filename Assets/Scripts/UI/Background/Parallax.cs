@@ -50,10 +50,10 @@ public class Parallax : MonoBehaviour
     private void ScrollBackground()
     {
         if(_horizontalScroll == true)
-            _imagePositionX -= _speed * Time.deltaTime * (_OtherSide == true? -1: 1);
+            _imagePositionX -= ScrollSpeedCalculation();
 
         if(_verticallScroll == true)
-            _imagePositionY -= _speed * Time.deltaTime * (_OtherSide == true? -1: 1);
+            _imagePositionY -= ScrollSpeedCalculation();
 
         if (_resetUVRectY == true)
             _imagePositionY = 0;
@@ -62,6 +62,11 @@ public class Parallax : MonoBehaviour
             _imagePositionX = 0;
 
         _image.uvRect = new Rect(_imagePositionX, _imagePositionY, _image.uvRect.width, _image.uvRect.height);
+    }
+
+    private float ScrollSpeedCalculation()
+    {
+        return _speed * Time.deltaTime * (_OtherSide == true ? -1 : 1);
     }
 
     private void OnGameStarted()

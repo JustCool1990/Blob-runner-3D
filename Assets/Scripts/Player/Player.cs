@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     private PlayerCollision _playerCollision;
     private int _brokenPartCount = 0;
+    private int _repairePartCount = 0;
 
     public event UnityAction Assembled;
     public event UnityAction LostLeftLeg;
@@ -84,14 +85,21 @@ public class Player : MonoBehaviour
         action?.Invoke();
     }
 
-    private void OnRepairePartPicked(int count)
+    private void OnRepairePartPicked(Color color)
+    {
+        _repairePartCount++;
+
+        RepaireBrokenParts(color);
+    }
+
+    private void RepaireBrokenParts(Color color)
     {
         foreach (var bodyPart in _bodyParts)
         {
-            if (bodyPart.HasBroken == true && count > 0)
+            if (bodyPart.HasBroken == true && _repairePartCount > 0)
             {
-                bodyPart.RepairePiece();
-                count--;
+                bodyPart.RepairePiece(color);
+                _repairePartCount--;
                 _brokenPartCount--;
             }
         }

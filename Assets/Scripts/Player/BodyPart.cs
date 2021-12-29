@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using RaymarcherPackage;
 
+[RequireComponent(typeof(RM_Object))]
 public class BodyPart : MonoBehaviour
 {
     [SerializeField] private BodyPart[] _relatedBodyParts;
     [SerializeField] private BodyPartName _bodyPartName;
 
+    private RM_Object _rm_Object;
     private bool _hasBroken = false;
     private Transform _parent;
 
@@ -19,6 +22,7 @@ public class BodyPart : MonoBehaviour
     private void Awake()
     {
         _parent = transform.parent;
+        _rm_Object = GetComponent<RM_Object>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -70,12 +74,19 @@ public class BodyPart : MonoBehaviour
         transform.localScale = Vector3.one;
     }
 
-    public void RepairePiece()
+    public void RepairePiece(Color color)
     {
         UpdateBrokenStatus(false);
         transform.SetParent(_parent);
         ResetTransform();
+        _rm_Object.rmColor = color;
+
         Repaired?.Invoke(_bodyPartName);
+    }
+
+    public void Colorize()
+    {
+
     }
 }
 
