@@ -6,24 +6,23 @@ using SimpleInputNamespace;
 
 public class MainMenuScreen : Screen
 {
-    [SerializeField] private Joystick _joystick;
+    [SerializeField] private TouchInput _touchInput;
 
     private bool _gameStarted = false;
 
-    public event UnityAction PlayButtonClick;
     public event UnityAction ScreenTouched;
 
     private void OnEnable()
     {
-        _joystick.ActivateJoystick += OnActivateJoystick;
+        _touchInput.ActivateMovement += OnActivateMovement;
     }
 
     private void OnDisable()
     {
-        _joystick.ActivateJoystick -= OnActivateJoystick;
+        _touchInput.ActivateMovement -= OnActivateMovement;
     }
 
-    private void OnActivateJoystick()
+    private void OnActivateMovement()
     {
         if (_gameStarted == false)
         {
@@ -37,7 +36,7 @@ public class MainMenuScreen : Screen
         CanvasGroup.alpha = 0;
         CanvasGroup.interactable = false;
         CanvasGroup.blocksRaycasts = false;
-        SwipePanel.raycastTarget = true;
+        TouchPanel.raycastTarget = true;
     }
 
     public override void Open()
@@ -46,6 +45,6 @@ public class MainMenuScreen : Screen
         CanvasGroup.alpha = 1;
         CanvasGroup.interactable = true;
         CanvasGroup.blocksRaycasts = true;
-        SwipePanel.raycastTarget = false;
+        TouchPanel.raycastTarget = true;
     }
 }

@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     private int _brokenPartCount = 0;
     private int _repairePartCount = 0;
 
-    public event UnityAction Assembled;
     public event UnityAction LostLeftLeg;
     public event UnityAction LostRightLeg;
     public event UnityAction LostLegs;

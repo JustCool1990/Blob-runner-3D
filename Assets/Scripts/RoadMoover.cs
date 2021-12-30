@@ -10,11 +10,6 @@ public class RoadMoover : MonoBehaviour
 
     private bool _gameStarted = false;
 
-    private void Awake()
-    {
-        _gameStarted = false;
-    }
-
     private void OnEnable()
     {
         _gameModeSwitcher.GameStarted += OnGameStarted;

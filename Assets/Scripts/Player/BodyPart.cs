@@ -83,11 +83,6 @@ public class BodyPart : MonoBehaviour
 
         Repaired?.Invoke(_bodyPartName);
     }
-
-    public void Colorize()
-    {
-
-    }
 }
 
 public enum BodyPartName

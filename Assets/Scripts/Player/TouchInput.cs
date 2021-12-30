@@ -2,48 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using SimpleInputNamespace;
+using UnityEngine.EventSystems;
 
-public class TouchInput : MonoBehaviour
+public class TouchInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    //private float _horizontalMove;
-    [SerializeField] private GameModeSwitcher _gameModeSwitcher;
-    [SerializeField] private Joystick _joystick;
-
     private bool _gameBegin = false;
+    private bool _controlCharacter = false;
+    private bool _canMove => _gameBegin == true && _controlCharacter == true;
 
     public event UnityAction<float> Touched;
     public event UnityAction Untouched;
-    private void OnEnable()
-    {
-        _gameModeSwitcher.GameStarted += OnGameStarted;
-        _joystick.DeactivateJoystick += OnDeactivateJoystick;
-    }
-
-    private void OnDisable()
-    {
-        _gameModeSwitcher.GameStarted -= OnGameStarted;
-        _joystick.DeactivateJoystick -= OnDeactivateJoystick;
-    }
+    public event UnityAction ActivateMovement;
 
     private void Update()
     {
-        /*if (SimpleInput.GetAxisRaw("Horizontal") >= 0.01f || SimpleInput.GetAxisRaw("Horizontal") <= -0.01f)
-            Touched?.Invoke(SimpleInput.GetAxisRaw("Horizontal"));*/
-
-        if(_gameBegin == true)
+        if (_canMove == true)
             Touched?.Invoke(Input.GetAxis("Mouse X"));
-        //Debug.Log(Input.GetAxis("Mouse X"));
-            
     }
 
-    private void OnGameStarted()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        _gameBegin = true;
+        if (_gameBegin == false)
+        {
+            ActivateMovement?.Invoke();
+            _gameBegin = true;
+        }
+        
+        _controlCharacter = true;
     }
 
-    private void OnDeactivateJoystick()
+    public void OnPointerUp(PointerEventData eventData)
     {
+        _controlCharacter = false;
         Untouched?.Invoke();
     }
 }
