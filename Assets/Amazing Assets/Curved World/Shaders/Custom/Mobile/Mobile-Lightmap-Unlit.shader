@@ -10,7 +10,7 @@ Shader "Amazing Assets/Curved World/Mobile/Unlit (Supports Lightmap)"
 
     Properties 
     {
-        [HideInInspector][CurvedWorldBendSettings]	  _CurvedWorldBendSettings("0|1|1", Vector) = (0, 0, 0, 0)
+        [HideInInspector][CurvedWorldBendSettings]	  _CurvedWorldBendSettings("0,27|1|1", Vector) = (0, 0, 0, 0)
 
         _MainTex ("Base (RGB)", 2D) = "white" { }
     }
@@ -32,7 +32,7 @@ SubShader
         #define USING_FOG (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
 
 
-#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
+#pragma shader_feature_local CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE CURVEDWORLD_BEND_TYPE_TWISTEDSPIRAL_X_POSITIVE
 #define CURVEDWORLD_BEND_ID_1
 #pragma shader_feature_local CURVEDWORLD_DISABLED_ON
 #pragma shader_feature_local CURVEDWORLD_NORMAL_TRANSFORMATION_ON
@@ -150,7 +150,7 @@ SubShader
         #define USING_FOG (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
 
 
-#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
+#pragma shader_feature_local CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE CURVEDWORLD_BEND_TYPE_TWISTEDSPIRAL_X_POSITIVE
 #define CURVEDWORLD_BEND_ID_1
 #pragma shader_feature_local CURVEDWORLD_DISABLED_ON
 #pragma shader_feature_local CURVEDWORLD_NORMAL_TRANSFORMATION_ON
@@ -275,7 +275,7 @@ SubShader
             #pragma fragment fragScenePickingPass
 
 
-#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
+#pragma shader_feature_local CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE CURVEDWORLD_BEND_TYPE_TWISTEDSPIRAL_X_POSITIVE
 #define CURVEDWORLD_BEND_ID_1
 #pragma shader_feature_local CURVEDWORLD_DISABLED_ON
 
@@ -308,7 +308,7 @@ SubShader
             #pragma fragment fragSceneHighlightPass
 
 
-#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
+#pragma shader_feature_local CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE CURVEDWORLD_BEND_TYPE_TWISTEDSPIRAL_X_POSITIVE
 #define CURVEDWORLD_BEND_ID_1
 #pragma shader_feature_local CURVEDWORLD_DISABLED_ON
 

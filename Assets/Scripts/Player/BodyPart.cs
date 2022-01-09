@@ -14,6 +14,7 @@ public class BodyPart : MonoBehaviour
     private bool _hasBroken = false;
     private Transform _parent;
 
+    public Color BodyPartColor { get; private set; }
     public BodyPartName BodyPartName => _bodyPartName;
     public bool HasBroken => _hasBroken;
     public event UnityAction<BodyPartName> Brokened;
@@ -23,6 +24,7 @@ public class BodyPart : MonoBehaviour
     {
         _parent = transform.parent;
         _rm_Object = GetComponent<RM_Object>();
+        BodyPartColor = _rm_Object.rmColor;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,6 +82,7 @@ public class BodyPart : MonoBehaviour
         transform.SetParent(_parent);
         ResetTransform();
         _rm_Object.rmColor = color;
+        BodyPartColor = color;
 
         Repaired?.Invoke(_bodyPartName);
     }

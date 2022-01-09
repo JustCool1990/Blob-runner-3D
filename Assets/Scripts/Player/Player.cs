@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] private BodyPart[] _bodyParts;
-    [SerializeField] private States _state = States.Assembled;
-
+    
+    private States _state = States.Assembled;
     private PlayerCollision _playerCollision;
     private int _brokenPartCount = 0;
     private int _repairePartCount = 0;
@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public event UnityAction RepairedRightLeg;
     public event UnityAction RepairedBody;
     public event UnityAction Died;
+    public event UnityAction LostBodyPart;
+    public event UnityAction RepaireBodyPart;
 
     private void Awake()
     {
@@ -55,6 +57,8 @@ public class Player : MonoBehaviour
 
         if (_brokenPartCount == _bodyParts.Length)
             Died?.Invoke();
+        else
+            LostBodyPart?.Invoke();
     }
 
     private void OnRepaired(BodyPartName bodyPartName)
@@ -87,8 +91,8 @@ public class Player : MonoBehaviour
     private void OnRepairePartPicked(Color color)
     {
         _repairePartCount++;
-
         RepaireBrokenParts(color);
+        RepaireBodyPart?.Invoke();
     }
 
     private void RepaireBrokenParts(Color color)
